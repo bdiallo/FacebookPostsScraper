@@ -6,6 +6,7 @@ from urllib.parse import urlparse, unquote
 from urllib.parse import parse_qs
 import pandas as pd
 import json
+from pprint import pprint as pp
 
 
 class FacebookPostsScraper:
@@ -109,7 +110,8 @@ class FacebookPostsScraper:
         if not redirect:
             raise Exception("Please log in desktop/mobile Facebook and change your password")
 
-        url_redirect = redirect.get('href', '')
+        url_redirect = "https://m.facebook.com" + redirect.get('href', '')
+        pp("url_redirect ===> " + url_redirect)
         resp = self.make_request(url_redirect)
         if resp is None:
             raise Exception(f"The login request couldn't be made: {url_redirect}")
